@@ -1,0 +1,21 @@
+<div id="container-finishgame-loose" fxLayout="column" fxLayoutAlign="center center" *ngIf="looseView">    
+    <button class="close-button" mat-button mat-dialog-close>&times;</button>
+    <img  src='../../../assets/images/loose_pickpugpoop.png' width="190px">
+    <p  class="title-finishgame">Ooops, your shoes didn't make it</p>
+</div>
+
+<div id="container-finishgame-win" fxLayout="column" fxLayoutAlign="center center" *ngIf="winView">    
+    <button class="close-button" mat-button mat-dialog-close>&times;</button>
+    <img   src='../../../assets/images/win_pickpugpoop.png' width="190px">
+    <p class="title-finishgame">Great job, your shoes survived!</p>
+</div>
+
+<div id="container-startgame" fxLayout="column" fxLayoutAlign="center center" *ngIf="startView">
+    <mat-toolbar id="container-startgame-title">
+        <span fxFlex="10"></span>
+        <h1 class="title-finishgame" fxFlex="80">Welcome, Owner!</h1>
+        <button class="close-button" mat-button mat-dialog-close fxFlex="10">&times;</button>
+    </mat-toolbar>    
+    <img   src='../../../assets/images/hello_pickpugpoop.png' width="100px">
+    <p id="footer-finishgame">Hidden treasures are waiting to be found in the grass</p>
+</div>

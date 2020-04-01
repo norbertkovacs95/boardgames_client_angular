@@ -1,0 +1,35 @@
+#canvas-container {
+    text-align: center !important;
+}
+
+
+#main-container, #canvas-container, #canvas {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+#main-container {
+    height: 100%;
+    background-color: #B1F774 !important;
+    display: flex;
+    flex-direction: column;
+}
+
+.fill-space {
+    flex: 1 1 auto !important;
+}
+
+#flagcounter {
+    text-align: center;
+    font-size: 130% !important;
+}
+
+#main-title{
+    text-align: center !important;
+    font-size: 130% !important;
+}
+
+#timer{
+    font-size: 130% !important;
+    text-align: right;
+}

@@ -1,0 +1,18 @@
+<div id="main-container">
+    <mat-toolbar class="fill-space">
+        <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="center center" fxFlex="25">
+            <img (click)="resetGame()" src='../../assets/images/pug.png' width="40px">
+            <h1 id="flagcounter"> : {{playBoard.flags}}</h1>
+        </div>
+        <h1 fxFlex="50" id="main-title">Pick Pug Poop!</h1>
+        <h1 #timer id="timer" fxFlex="25">00 : 00</h1>
+    </mat-toolbar>
+    <div id="canvas-container">
+        <canvas #canvas height="450px" width="450px"></canvas>
+    </div>
+    <div style="display: none;" #imageContainer> 
+        <img #grass style="display: none;" src='../../assets/images/grass.png' width="50px" height="50px">
+        <img #pug style="display: none;" src='../../assets/images/pug.png' width="50px" height="50px">
+        <img #poop style="display: none;" src='../../assets/images/poop.png' width="50px" height="50px">
+    </div>
+</div>
