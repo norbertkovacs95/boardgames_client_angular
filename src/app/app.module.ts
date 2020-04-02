@@ -14,14 +14,20 @@ import { MineSweeperMenuComponent } from './mine-sweeper/mine-sweeper-menu/mine-
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { MineSweeperPopupComponent } from './mine-sweeper/mine-sweeper-popup/mine-sweeper-popup.component'
+import { MineSweeperPopupComponent } from './mine-sweeper/mine-sweeper-popup/mine-sweeper-popup.component';
+import { LoginComponent } from './login/login.component';
+import { GamesComponent } from './games/games.component';
+import { SnakeComponent } from './snake/snake.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     MineSweeperGameComponent,
     MineSweeperMenuComponent,
-    MineSweeperPopupComponent
+    MineSweeperPopupComponent,
+    LoginComponent,
+    GamesComponent,
+    SnakeComponent
   ],
   imports: [
     BrowserModule,

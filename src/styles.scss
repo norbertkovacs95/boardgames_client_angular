@@ -30,3 +30,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
   max-width: 100vw !important;
   padding: 0 !important;
 }
+
+.fill-space {
+  flex: 1 1 auto !important;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
 import { MineSweeperPopupComponent} from './mine-sweeper-popup/mine-sweeper-popup.component';
@@ -9,7 +9,7 @@ import { MineSweeperPopupComponent} from './mine-sweeper-popup/mine-sweeper-popu
   styleUrls: ['./mine-sweeper-game.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class MineSweeperGameComponent implements OnInit {
+export class MineSweeperGameComponent implements OnInit, OnDestroy {
 
   playBoard: MineSweeperBoard;
   @ViewChild('canvas', { static: true }) canvas: ElementRef<HTMLCanvasElement>;
@@ -33,9 +33,19 @@ export class MineSweeperGameComponent implements OnInit {
       }
     }
 
-    this.dialog.open(MineSweeperPopupComponent, {width: '350px', height: '300px',data:{
+    const dialogRef = this.dialog.open(MineSweeperPopupComponent, {width: '350px', height: '350px',data:{
       startView: true
     }});
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.dialog.open(MineSweeperPopupComponent, {width: '350px', height: '350px',data:{
+        infoView: true
+      }});
+    })
+  }
+
+  ngOnDestroy(): void {
+    if (typeof this.playBoard !== 'undefined') this.playBoard.stopTimer(); 
   }
 
   createGame() {
@@ -103,7 +113,7 @@ class MineSweeperBoard {
     } else if (difficulty === 'hard') {
       
     } else {
-      throw new Error(`Difficulty must be easy, medium or hard, insead got: ${difficulty}`);
+      throw new Error(`Difficulty must be easy, medium or hard, instead got: ${difficulty}`);
     }
 
     this.setmouseEvents();

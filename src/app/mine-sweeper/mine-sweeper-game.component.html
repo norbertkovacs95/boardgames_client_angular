@@ -2,7 +2,7 @@
     <mat-toolbar class="fill-space">
         <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="center center" fxFlex="25">
             <img (click)="resetGame()" src='../../assets/images/pug.png' width="40px">
-            <h1 id="flagcounter"> : {{playBoard.flags}}</h1>
+            <h1 id="flagcounter"> : {{playBoard.flags || 0}}</h1>
         </div>
         <h1 fxFlex="50" id="main-title">Pick Pug Poop!</h1>
         <h1 #timer id="timer" fxFlex="25">00 : 00</h1>

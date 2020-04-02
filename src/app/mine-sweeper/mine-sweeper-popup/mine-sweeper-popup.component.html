@@ -1,21 +1,54 @@
-<div id="container-finishgame-loose" fxLayout="column" fxLayoutAlign="center center" *ngIf="looseView">    
-    <button class="close-button" mat-button mat-dialog-close>&times;</button>
-    <img  src='../../../assets/images/loose_pickpugpoop.png' width="190px">
-    <p  class="title-finishgame">Ooops, your shoes didn't make it</p>
+<div id="container-finishgame-loose" fxLayout="column" fxLayoutAlign="center center" *ngIf="looseView">
+    <mat-toolbar id="toolbar-container">
+        <button class="close-button" mat-button mat-dialog-close>&times;</button>
+    </mat-toolbar>
+    <img  src='../../../assets/images/loose_pickpugpoop.png' width="180px">
+    <p  class="title-finishgame">Ooops, your shoes didn't make it...</p>
 </div>
 
-<div id="container-finishgame-win" fxLayout="column" fxLayoutAlign="center center" *ngIf="winView">    
-    <button class="close-button" mat-button mat-dialog-close>&times;</button>
-    <img   src='../../../assets/images/win_pickpugpoop.png' width="190px">
+<div id="container-finishgame-win" fxLayout="column" fxLayoutAlign="center center" *ngIf="winView">   
+    <mat-toolbar id="toolbar-container">
+        <button class="close-button" mat-button mat-dialog-close>&times;</button>
+    </mat-toolbar> 
+    <img   id="victory-pug" src='../../../assets/images/win_pickpugpoop.png' width="180px">
     <p class="title-finishgame">Great job, your shoes survived!</p>
 </div>
 
-<div id="container-startgame" fxLayout="column" fxLayoutAlign="center center" *ngIf="startView">
-    <mat-toolbar id="container-startgame-title">
-        <span fxFlex="10"></span>
-        <h1 class="title-finishgame" fxFlex="80">Welcome, Owner!</h1>
-        <button class="close-button" mat-button mat-dialog-close fxFlex="10">&times;</button>
-    </mat-toolbar>    
-    <img   src='../../../assets/images/hello_pickpugpoop.png' width="100px">
-    <p id="footer-finishgame">Hidden treasures are waiting to be found in the grass</p>
+<div id="container-startgame" fxLayout="column" *ngIf="startView">
+    <mat-toolbar id="toolbar-container">
+        <div fxFlex="15"></div>
+        <p class="title-finishgame" fxFlex="80">Welcome, Owner!</p>
+        <button class="close-button zero-padding" mat-button mat-dialog-close fxFlex="15">&times;</button>
+    </mat-toolbar>
+    <div fxLayout="column" fxLayoutAlign="center center" class="fill-space">
+        <img   src='../../../assets/images/hello_pickpugpoop.png' width="110px">
+        <p id="footer-finishgame">Hidden treasures are waiting to be found in the grass</p>
+    </div>    
+</div>
+
+<div id="container-startgame" fxLayout="column" *ngIf="infoView">
+    <mat-toolbar id="toolbar-container-tips" fxLayoutAlign="center center">
+        <p class="title-tips">Some usefull tips</p>
+    </mat-toolbar>
+    <div id="container-startgame-tips fill-space" fxLayout="column" fxLayoutAlign="center center" class="fill-space">
+        <div class="list-item" fxLayout="row" fxLayoutAlign="center start">
+            <p class="find-poops-text">There are 10 hidden pug poops in the grass!</p>
+        </div>
+        <div class="list-item" fxLayout="row" fxLayoutAlign="center center">
+            <p><span class="highlighted-text">Left Click</span> on</p>
+            <img src='../../../assets/images/grass.png' width="50px" class="grass-img">
+            <p>to check a grass</p>
+        </div>
+        <div class="list-item" fxLayout="row" fxLayoutAlign="center center">
+            <p><span class="highlighted-text">Right Click</span> on</p>
+            <img src='../../../assets/images/grass.png' width="50px" class="grass-img">
+            <p>to mark a grass</p>
+        </div>
+        <div class="list-item" fxLayout="row" fxLayoutAlign="center center">
+            <p><span class="highlighted-text">Left Click</span> on</p>
+            <img src='../../../assets/images/pug.png' width="30px" class="pug-img">
+            <p>to start a new game</p>
+        </div>
+    </div>
+    <div fxLayoutAlign="center center" id="footer-tips"><button mat-raised-button mat-dialog-close>START GAME</button></div>    
 </div>
