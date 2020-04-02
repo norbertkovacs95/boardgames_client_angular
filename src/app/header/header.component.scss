@@ -1,0 +1,13 @@
+@import '../../variables';
+
+.active {
+    border-bottom: 3px solid mat-color($accentPalette);
+}
+
+a[mat-button] {
+    border-radius: 0px !important;
+}
+
+.header-container {
+    width: 100%;
+}

@@ -1,0 +1,16 @@
+<mat-toolbar  fxLayout="row">
+    <div class="header-container" fxShow="true" fxHide.lt-md="true" fxLayout="row" fxLayoutGap="20px">
+        <span class="fill-space"></span>
+        <a mat-button routerLink="/games/pickpugpoop" routerLinkActive="active"><span>Pick Pug Poop</span></a>
+        <a mat-button routerLink="/games/snake" routerLinkActive="active"><span>Snake</span></a>
+        <span class="fill-space"></span>
+    </div>
+    <div class="header-container" fxShow="true" fxHide.gt-sm="true">
+        <span class="fill-space"></span>
+        <button mat-icon-button [matMenuTriggerFor]="beforeMenu"><mat-icon>menu</mat-icon></button>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+            <button mat-menu-item><a mat-button  routerLink="/games/pickpugpoop" routerLinkActive="active"><span>Pick Pug Poop</span></a></button>
+            <button mat-menu-item><a mat-button  routerLink="/games/snake" routerLinkActive="active"><span>Snake</span></a></button>
+        </mat-menu>
+    </div>
+</mat-toolbar>
