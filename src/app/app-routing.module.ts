@@ -5,6 +5,7 @@ import { LoginComponent } from '../app/login/login.component';
 import { GamesComponent } from '../app/games/games.component';
 import { MineSweeperMenuComponent } from '../app/mine-sweeper/mine-sweeper-menu/mine-sweeper-menu.component'
 import { SnakeComponent } from '../app/snake/snake.component';
+import { SudokuComponent } from '../app/sudoku/sudoku.component';
 
 const routes: Routes = [
   { path: 'login',  component: LoginComponent },
@@ -12,9 +13,10 @@ const routes: Routes = [
     path: 'games',
     component: GamesComponent,
     children: [
-      { path: '', component: MineSweeperMenuComponent },
+      { path: '', redirectTo: '/games/pickpugpoop', pathMatch: 'full' },
       { path: 'pickpugpoop', component: MineSweeperMenuComponent },
-      { path:'snake', component: SnakeComponent }
+      { path:'snake', component: SnakeComponent },
+      { path:'sudoku', component: SudokuComponent }
     ] 
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' }

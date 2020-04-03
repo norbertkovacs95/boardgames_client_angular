@@ -1,0 +1,67 @@
+@import '../../../variables';
+
+#main-container-pickpugpoop{
+    width: 100% !important;
+}
+
+#jumbotron-container{
+    width: 100% !important;
+    padding-left: 5em !important;
+    padding-right: 5em !important;
+    padding-top: 2em !important;
+    padding-bottom: 2em !important;
+    border-bottom: 4px solid mat-color($accentPalette);
+    margin-bottom: 3em !important;
+    background-color: $darkAccentPalette;
+    
+}
+
+#start-game-container{
+    padding-left: 5em !important;
+    padding-right: 5em !important;
+    width: 100%;
+}
+
+#jumbotron-title{
+    width: 100%;
+    text-align: left !important;
+    margin-top: 0 !important;
+    color: white !important;
+}
+
+#jumbotron-subtext{
+    text-align: justify !important;
+    margin: 0 !important;
+    color: white !important;
+}
+
+.start-game-button {
+    font-size: large !important;
+}
+
+.start-game-button:hover{
+    background-color: $lighAccentPalette;
+}
+
+@media screen and (min-width: 960px) {
+    .start-game-button {
+        width: 20em !important;
+        height: 3em !important;
+    }
+    
+
+  }
+
+  @media screen and (max-width: 959px) {
+    .start-game-button {
+        height: 2.5em !important;
+    }
+
+    #jumbotron-title{
+        text-align: center !important;
+    }
+
+    #jumbotron-image{
+        margin-left: 3em !important;
+    }
+  }

@@ -18,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 import { GamesComponent } from './games/games.component';
 import { SnakeComponent } from './snake/snake.component';
 import { HeaderComponent } from './header/header.component';
+import { SudokuComponent } from './sudoku/sudoku.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HeaderComponent } from './header/header.component';
     LoginComponent,
     GamesComponent,
     SnakeComponent,
-    HeaderComponent
+    HeaderComponent,
+    SudokuComponent
   ],
   imports: [
     BrowserModule,
