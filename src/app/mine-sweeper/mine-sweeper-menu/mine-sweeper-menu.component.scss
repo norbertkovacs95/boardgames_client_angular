@@ -11,7 +11,6 @@
     padding-top: 2em !important;
     padding-bottom: 2em !important;
     border-bottom: 4px solid mat-color($accentPalette);
-    margin-bottom: 3em !important;
     background-color: $darkAccentPalette;
     
 }
@@ -43,13 +42,31 @@
     background-color: $lighAccentPalette;
 }
 
+#historytable-container{
+    //background-color: $bodyPalette;
+    font-size: 100%;
+}
+
+
+table {
+    width: 100%;
+}
+
+td, th {
+    width: 25%;
+}
+
 @media screen and (min-width: 960px) {
     .start-game-button {
         width: 20em !important;
         height: 3em !important;
     }
     
-
+    #historytable-container{
+        margin: 0em 3em 0em 3em;
+        padding: 2em;
+    }
+    
   }
 
   @media screen and (max-width: 959px) {
@@ -64,4 +81,14 @@
     #jumbotron-image{
         margin-left: 3em !important;
     }
+
+    #historytable-container{
+        margin: 0em 1.5em 0em 1.5em;
+        padding: 1em;
+    }
+
+    td{
+        padding: 1em !important;
+    }
   }
+

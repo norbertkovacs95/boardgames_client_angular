@@ -1,4 +1,4 @@
-<div id="main-container-pickpugpoop" fxLayout="column">
+<div id="main-container-pickpugpoop" fxLayout="column" fxLayoutGap="3em">
     <div id="jumbotron-container" fxLayout="column" fxLayoutAlign="center center">
         <div fxLayout="row"
             fxLayout.lt-md="column"
@@ -25,9 +25,55 @@
         fxLayoutGap.lt-md="20px"
         fxLayoutAlign="space-around">
 
-        <button class="start-game-button" mat-raised-button color="accent" (click)="openGame()" >Easy game</button>
-        <button class="start-game-button" mat-raised-button color="accent" (click)="openGame()" >Medium game</button>
-        <button class="start-game-button" mat-raised-button color="accent" (click)="openGame()" >Hard game</button>
+        <button class="start-game-button" mat-raised-button color="accent" (click)="openGame()">Easy</button>
+        <button class="start-game-button" mat-raised-button color="accent" (click)="openGame()">Medium</button>
+        <button class="start-game-button" mat-raised-button color="accent" (click)="openGame()">Hard</button>
+    </div>
+    <div class="mat-elevation-z18" 
+        id="historytable-container" 
+        fxFlex="column"
+        fxLayoutGap="20px">
+
+        <mat-toolbar>
+            <span class="fill-space"></span>
+            <h2>Previously on Pick Pug Poop</h2>
+            <span class="fill-space"></span>
+        </mat-toolbar>
+        
+        <table mat-table [dataSource]="playHistorySource" matSort>
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="Username">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
+            <td mat-cell *matCellDef="let row"> {{row.username}} </td>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="Date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+            <td mat-cell *matCellDef="let row"> {{row.date | date:'M/d/yy, h:mm a'}}</td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="Difficulty">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Difficulty </th>
+            <td mat-cell *matCellDef="let row"> {{row.difficulty}} </td>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="Time">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Time </th>
+            <td mat-cell *matCellDef="let row"> {{row.time | time}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+        </table>
+
+        <mat-paginator color="accent" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+    <div heigh="200px">
     </div>
 </div>
 

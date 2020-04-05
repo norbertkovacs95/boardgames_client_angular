@@ -74,6 +74,7 @@ class MineSweeperBoard {
   private clickedUnits: number = 0;
   private unitPx: number = 50;
   private gameEnded: boolean = false;
+  private gameStarted: boolean= false;
 
   private canvas: ElementRef<HTMLCanvasElement>;
   private ctx: CanvasRenderingContext2D;
@@ -162,7 +163,7 @@ class MineSweeperBoard {
 
     //Set event on canvas left click
     this.canvas.nativeElement.onclick = function(e: MouseEvent) {
-      if (board.clickedUnits === 0) board.setTimerFunction();
+      if (!board.gameStarted) board.setTimerFunction();
       let rect: DOMRect = _canvas.getBoundingClientRect() as DOMRect;
       let unitW = Math.floor((e.x - rect.x) / board.unitPx);
       let unitH = Math.floor((e.y - rect.y) / board.unitPx);
@@ -220,7 +221,7 @@ class MineSweeperBoard {
     this.canvas.nativeElement.oncontextmenu = function(e: MouseEvent) {
 
       if (e.button == 2) {
-        if (board.clickedUnits === 0) board.setTimerFunction();
+        if (!board.gameStarted) board.setTimerFunction();
         let rect: DOMRect = _canvas.getBoundingClientRect() as DOMRect;
         let unitW = Math.floor((e.x - rect.x) / board.unitPx);
         let unitH = Math.floor((e.y - rect.y) / board.unitPx);
@@ -244,6 +245,7 @@ class MineSweeperBoard {
   }
 
   private setTimerFunction():void {
+    this.gameStarted = true;
     this.timerStartDate = new Date();
     this.timerFunction = window.setInterval(() => {
       let currDate = new Date();

@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
+
 import { MatDialog } from '@angular/material';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+
 import { MineSweeperGameComponent } from '../mine-sweeper-game.component';
+import { PickPugPoopResults } from '../../shared/DUMYRESULT';
+import { PickPugPoopResult } from '../../shared/pickpugpoopResult';
 
 @Component({
   selector: 'app-mine-sweeper-menu',
@@ -9,9 +16,20 @@ import { MineSweeperGameComponent } from '../mine-sweeper-game.component';
 })
 export class MineSweeperMenuComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  displayedColumns: string[] = ['Username', 'Date', 'Difficulty', 'Time'];
+  playHistory: PickPugPoopResult[] = PickPugPoopResults;
+  playHistorySource: MatTableDataSource<PickPugPoopResult>;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  constructor(public dialog: MatDialog) { 
+    this.playHistorySource = new MatTableDataSource(this.playHistory);
+  }
 
   ngOnInit() {
+    this.playHistorySource.paginator = this.paginator;
+    this.playHistorySource.sort = this.sort;
   }
 
   openGame() {

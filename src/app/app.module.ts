@@ -10,6 +10,9 @@ import { MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTableModule} from '@angular/material/table'
+import { MatPaginatorModule } from '@angular/material';
+import { MatSortModule } from '@angular/material';
 
 import { MineSweeperGameComponent } from './mine-sweeper/mine-sweeper-game.component';
 import { MineSweeperMenuComponent } from './mine-sweeper/mine-sweeper-menu/mine-sweeper-menu.component';
@@ -19,6 +22,7 @@ import { GamesComponent } from './games/games.component';
 import { SnakeComponent } from './snake/snake.component';
 import { HeaderComponent } from './header/header.component';
 import { SudokuComponent } from './sudoku/sudoku.component';
+import { TimePipe } from './pipes/time.pipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,8 @@ import { SudokuComponent } from './sudoku/sudoku.component';
     GamesComponent,
     SnakeComponent,
     HeaderComponent,
-    SudokuComponent
+    SudokuComponent,
+    TimePipe
   ],
   imports: [
     BrowserModule,
@@ -41,7 +46,10 @@ import { SudokuComponent } from './sudoku/sudoku.component';
     MatToolbarModule,
     FlexLayoutModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent],
