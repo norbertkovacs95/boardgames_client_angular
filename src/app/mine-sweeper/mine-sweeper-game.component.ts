@@ -1,5 +1,5 @@
-import { Component, OnInit, ElementRef, ViewChild, ViewEncapsulation, OnDestroy } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { Component, OnInit, ElementRef, ViewChild, ViewEncapsulation, OnDestroy, Inject } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 
 import { MineSweeperPopupComponent} from './mine-sweeper-popup/mine-sweeper-popup.component';
 
@@ -11,6 +11,7 @@ import { MineSweeperPopupComponent} from './mine-sweeper-popup/mine-sweeper-popu
 })
 export class MineSweeperGameComponent implements OnInit, OnDestroy {
 
+  difficulty: string;
   playBoard: MineSweeperBoard;
   @ViewChild('canvas', { static: true }) canvas: ElementRef<HTMLCanvasElement>;
   @ViewChild('imageContainer', { static: true }) imageContainer: ElementRef<HTMLDivElement>;
@@ -19,7 +20,8 @@ export class MineSweeperGameComponent implements OnInit, OnDestroy {
   @ViewChild('poop', { static: true }) poop: ElementRef<HTMLImageElement>;
   @ViewChild('timer', { static: true }) timerEl: ElementRef<HTMLElement>;
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, @Inject(MAT_DIALOG_DATA) data) {
+    this.difficulty = data.difficulty;
    }
 
   ngOnInit() {
@@ -50,7 +52,7 @@ export class MineSweeperGameComponent implements OnInit, OnDestroy {
 
   createGame() {
     if (typeof this.playBoard !== 'undefined') this.playBoard.stopTimer(); 
-    this.playBoard = new MineSweeperBoard('easy', this.canvas, this.grass,this.pug, this.poop, this.timerEl, this.dialog,'#b1f774', '#5D5959');
+    this.playBoard = new MineSweeperBoard(this.difficulty, this.canvas, this.grass,this.pug, this.poop, this.timerEl, this.dialog,'#b1f774', '#5D5959');
   }
 
   resetGame() {
@@ -72,7 +74,7 @@ class MineSweeperBoard {
   private mines: number;
   private units: number;
   private clickedUnits: number = 0;
-  private unitPx: number = 50;
+  private unitPx: number;
   private gameEnded: boolean = false;
   private gameStarted: boolean= false;
 
@@ -103,21 +105,35 @@ class MineSweeperBoard {
     if(typeof blankColor !== 'undefined') this.blankColor = blankColor;
 
     if (difficulty === 'easy') {
+      this.unitPx = 50;
       this.canvas.nativeElement.width = 450;
       this.canvas.nativeElement.height = 450;
       this.mines = 10;
       this.units = 81;
       this.drawCanvas(9,9);
-      this.createBoardUnits(9,9,10);
+      this.createBoardUnits(9,9,this.mines);
     } else if (difficulty === 'medium') {
-      
+      this.unitPx = 40;
+      this.canvas.nativeElement.width = 480;
+      this.canvas.nativeElement.height = 480;
+      this.mines = 25;
+      this.units = 256;
+      this.drawCanvas(12,12);
+      this.createBoardUnits(12,12,this.mines);
     } else if (difficulty === 'hard') {
-      
+      this.unitPx = 35;
+      this.canvas.nativeElement.width = 560;
+      this.canvas.nativeElement.height = 560;
+      this.mines = 60;
+      this.units = 256;
+      this.drawCanvas(16,16);
+      this.createBoardUnits(16,16,this.mines);
     } else {
       throw new Error(`Difficulty must be easy, medium or hard, instead got: ${difficulty}`);
     }
 
     this.setmouseEvents();
+    console.log(this);
   }
 
   private drawCanvas(height: number, width: number):void {
@@ -133,14 +149,14 @@ class MineSweeperBoard {
     for (let h = 0; h < height; h++) {
       this.boardUnits[h] = new Array(width);
       for (let w = 0; w < width; w++) {
-        this.boardUnits[h][w] = new MineSweeperUnit(w * this.unitPx, h * this.unitPx, '' + h + w);
+        this.boardUnits[h][w] = new MineSweeperUnit(w * this.unitPx, h * this.unitPx, '' + h + '_' + w);
       }
     }
 
     let _mines: number = 0;
     while(_mines < mines) {
-      let randW = Math.floor(Math.random() * 9 );
-      let randH = Math.floor(Math.random() * 9 );
+      let randW = Math.floor(Math.random() * width );
+      let randH = Math.floor(Math.random() * height );
       if(!this.boardUnits[randH][randW].isMine) {
         this.boardUnits[randH][randW].isMine = true;
         _mines += 1;
@@ -186,7 +202,7 @@ class MineSweeperBoard {
             
             while(unitsToShow.length) {
               let arrayToPush : MineSweeperUnit[] = [];
-
+              
               unitsToShow.forEach(unit => {
                 if(unit.nearbyMines === 0) {
                   let nearbyUnits: MineSweeperUnit[] = board.getNerbyUnits(unit);
@@ -198,7 +214,7 @@ class MineSweeperBoard {
                 } else if(unit.nearbyMines > 0) {
                   board.drawNumberOnBoard(String(unit.nearbyMines), unit.x , unit.y );
                 }
-                board.boardUnits[Number(unit.id.substr(0,1))][Number(unit.id.substr(1,1))].isClicked = true;
+                board.boardUnits[Number(unit.id.split('_')[0])][Number(unit.id.split('_')[1])].isClicked = true;
                 board.clickedUnits += 1;
               })
               arrayToPush = arrayToPush.filter(unit => !unit.isClicked);
@@ -231,11 +247,11 @@ class MineSweeperBoard {
           if (unit.isFlagged) {
             board.flags -= 1;
             board.drawUnitOnBoard(unit.x, unit.y);
-            board.boardUnits[Number(unit.id.substr(0,1))][Number(unit.id.substr(1,1))].isFlagged = false;
+            board.boardUnits[Number(unit.id.split('_')[0])][Number(unit.id.split('_')[1])].isFlagged = false;
           } else if(!unit.isFlagged && board.flags < board.mines){
             board.flags += 1;
             board.drawFlagOnBoard(unit.x, unit.y)
-            board.boardUnits[Number(unit.id.substr(0,1))][Number(unit.id.substr(1,1))].isFlagged = true;
+            board.boardUnits[Number(unit.id.split('_')[0])][Number(unit.id.split('_')[1])].isFlagged = true;
           }
         }
         return false;

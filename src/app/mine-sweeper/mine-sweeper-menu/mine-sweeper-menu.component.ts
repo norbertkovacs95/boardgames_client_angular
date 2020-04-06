@@ -32,7 +32,32 @@ export class MineSweeperMenuComponent implements OnInit {
     this.playHistorySource.sort = this.sort;
   }
 
-  openGame() {
-    this.dialog.open(MineSweeperGameComponent, {width: '454px', height: '554px'});
+  openGame(difficulty: string) {
+    switch (difficulty) {
+      case 'easy':
+        this.dialog.open(MineSweeperGameComponent, {width: '454px', height: '544px',
+          data: {
+            difficulty: 'easy'
+          }
+        });
+        break;
+
+      case 'medium':
+        this.dialog.open(MineSweeperGameComponent, {width: '484px', height: '584px',
+        data: {
+          difficulty: 'medium'
+          }
+        });
+        break;
+
+      case 'hard':
+        this.dialog.open(MineSweeperGameComponent, {width: '564px', height: '664px',
+        data: {
+          difficulty: 'hard'
+          }
+        });
+        break;
+    }
+    
   }
 }

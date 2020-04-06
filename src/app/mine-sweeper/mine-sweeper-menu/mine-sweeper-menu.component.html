@@ -25,9 +25,9 @@
         fxLayoutGap.lt-md="20px"
         fxLayoutAlign="space-around">
 
-        <button class="start-game-button" mat-raised-button color="accent" (click)="openGame()">Easy</button>
-        <button class="start-game-button" mat-raised-button color="accent" (click)="openGame()">Medium</button>
-        <button class="start-game-button" mat-raised-button color="accent" (click)="openGame()">Hard</button>
+        <button class="start-game-button" mat-raised-button color="accent" (click)="openGame('easy')">Easy</button>
+        <button class="start-game-button" mat-raised-button color="accent" (click)="openGame('medium')">Medium</button>
+        <button class="start-game-button" mat-raised-button color="accent" (click)="openGame('hard')">Hard</button>
     </div>
     <div class="mat-elevation-z18" 
         id="historytable-container" 
