@@ -12,6 +12,7 @@ import { MineSweeperPopupComponent} from './mine-sweeper-popup/mine-sweeper-popu
 export class MineSweeperGameComponent implements OnInit, OnDestroy {
 
   difficulty: string;
+  mines: number;
   playBoard: MineSweeperBoard;
   @ViewChild('canvas', { static: true }) canvas: ElementRef<HTMLCanvasElement>;
   @ViewChild('imageContainer', { static: true }) imageContainer: ElementRef<HTMLDivElement>;
@@ -22,6 +23,7 @@ export class MineSweeperGameComponent implements OnInit, OnDestroy {
 
   constructor(private dialog: MatDialog, @Inject(MAT_DIALOG_DATA) data) {
     this.difficulty = data.difficulty;
+    this.mines = data.mines;
    }
 
   ngOnInit() {
@@ -41,7 +43,8 @@ export class MineSweeperGameComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(() => {
       this.dialog.open(MineSweeperPopupComponent, {width: '350px', height: '350px',data:{
-        infoView: true
+        infoView: true,
+        mines: this.mines
       }});
     })
   }

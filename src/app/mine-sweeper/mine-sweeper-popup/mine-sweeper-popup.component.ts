@@ -13,12 +13,14 @@ export class MineSweeperPopupComponent implements OnInit {
   looseView: boolean = false;
   startView: boolean = false;
   infoView:boolean = false;
+  mines:number;
 
   constructor(@Inject(MAT_DIALOG_DATA) data) { 
     if(typeof data.winView !== 'undefined') this.winView = data.winView;
     if(typeof data.looseView !== 'undefined') this.looseView = data.looseView;
     if(typeof data.startView !== 'undefined') this.startView = data.startView;
     if(typeof data.infoView !== 'undefined') this.infoView = data.infoView;
+    if(typeof data.mines !== 'undefined') this.mines = data.mines;
   }
 
   ngOnInit() {

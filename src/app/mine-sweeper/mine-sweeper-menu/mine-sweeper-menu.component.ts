@@ -37,7 +37,8 @@ export class MineSweeperMenuComponent implements OnInit {
       case 'easy':
         this.dialog.open(MineSweeperGameComponent, {width: '454px', height: '544px',
           data: {
-            difficulty: 'easy'
+            difficulty: 'easy',
+            mines: 10
           }
         });
         break;
@@ -45,7 +46,8 @@ export class MineSweeperMenuComponent implements OnInit {
       case 'medium':
         this.dialog.open(MineSweeperGameComponent, {width: '484px', height: '584px',
         data: {
-          difficulty: 'medium'
+          difficulty: 'medium',
+          mines: 25
           }
         });
         break;
@@ -53,7 +55,8 @@ export class MineSweeperMenuComponent implements OnInit {
       case 'hard':
         this.dialog.open(MineSweeperGameComponent, {width: '564px', height: '664px',
         data: {
-          difficulty: 'hard'
+          difficulty: 'hard',
+          mines: 60
           }
         });
         break;
