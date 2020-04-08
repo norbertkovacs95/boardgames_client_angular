@@ -1,5 +1,8 @@
 @import '../../../variables';
 
+$pFontSize: 120%;
+$pFontSizeSW: 105%;
+
 #main-container-pickpugpoop{
     width: 100% !important;
 }
@@ -18,8 +21,46 @@
 #start-game-container{
     padding-left: 5em !important;
     padding-right: 5em !important;
+    //padding-bottom: 3em !important;
+    width: 100%;
+    //border-bottom: 4px solid mat-color($accentPalette);
+}
+
+#dashboard-title{
+    margin: 0;
+    color: $toolbarPlatte !important;
+}
+
+
+#dashboard-container{
+    padding-left: 5em !important;
+    padding-right: 5em !important;
+    //padding-bottom: 3em !important;
     width: 100%;
 }
+
+.dashboard-topplayer-container {
+    width: 20em !important;
+}
+
+.dashboard-topplayer-container > div {
+    //border-bottom: 4px solid mat-color($accentPalette);
+    //padding-bottom: 0.5em;
+    border-top: 4px solid mat-color($accentPalette);
+    padding-top: 0.5em;
+}
+
+.dashboard-topplayer-container p{
+    margin: 0em;
+    color: $bodyPalette !important;
+    font-size: $pFontSize;
+}
+
+.dashboard-topplayer-container h2{
+    margin: 0em;
+    color: $bodyPalette !important;
+}
+
 
 #jumbotron-title{
     width: 100%;
@@ -35,16 +76,11 @@
 }
 
 .start-game-button {
-    font-size: large !important;
+    font-size: $pFontSize !important;
 }
 
 .start-game-button:hover{
     background-color: $lighAccentPalette;
-}
-
-#historytable-container{
-    //background-color: $bodyPalette;
-    font-size: 100%;
 }
 
 
@@ -56,6 +92,11 @@ td, th {
     width: 25%;
 }
 
+.mat-cell, .mat-header-cell{
+    font-size: $pFontSize !important;
+}
+
+
 @media screen and (min-width: 960px) {
     .start-game-button {
         width: 20em !important;
@@ -66,7 +107,7 @@ td, th {
         margin: 0em 3em 0em 3em;
         padding: 2em;
     }
-    
+
   }
 
   @media screen and (max-width: 959px) {
@@ -89,6 +130,10 @@ td, th {
 
     td{
         padding: 1em !important;
+    }
+
+    .mat-cell, .mat-header-cell{
+        font-size: $pFontSizeSW !important;
     }
   }
 

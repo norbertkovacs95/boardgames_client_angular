@@ -16,6 +16,26 @@ import { PickPugPoopResult } from '../../shared/pickpugpoopResult';
 })
 export class MineSweeperMenuComponent implements OnInit {
 
+  topPlayers: PickPugPoopResult[] = [
+    {
+    username: 'EveSuukszag',
+    date: new Date(),
+    time: 150,
+    difficulty: 'easy'
+    },
+    {
+      username: 'EvePoopszag',
+      date: new Date(),
+      time: 500,
+      difficulty: 'meidum'
+    },
+    {
+      username: 'EvePoopSuukSzag',
+      date: new Date(),
+      time: 600,
+      difficulty: 'hard'
+    }
+  ]
   displayedColumns: string[] = ['Username', 'Date', 'Difficulty', 'Time'];
   playHistory: PickPugPoopResult[] = PickPugPoopResults;
   playHistorySource: MatTableDataSource<PickPugPoopResult>;

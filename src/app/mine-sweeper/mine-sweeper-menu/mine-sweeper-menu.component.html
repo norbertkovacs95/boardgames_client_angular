@@ -29,6 +29,55 @@
         <button class="start-game-button" mat-raised-button color="accent" (click)="openGame('medium')">Medium</button>
         <button class="start-game-button" mat-raised-button color="accent" (click)="openGame('hard')">Hard</button>
     </div>
+    <div fxLayoutAlign="center center" fxLayout="column" fxLayoutGap="0.5em" id="dashboard-main-container" class="mmat-elevation-z18">
+        <h1 id="dashboard-title">Fastest pug poop pickers</h1>
+
+        <div id="dashboard-container" 
+            fxLayout="row" 
+            fxLayout.lt-md="column"
+            fxLayoutGap="20px"
+            fxLayoutGap.lt-md="30px"
+            fxLayoutAlign="space-around"
+            fxLayoutAlign.lt-md="center center">
+
+            <div class="dashboard-topplayer-container"
+                    fxLayout="column"
+                    fxLayoutAlign="center center"
+                    fxLayoutGap="0.5em">
+                <h2>Easy</h2>
+                <img src='../../../assets/images/easy.png' alt="Easy Trophy" height="220px"> 
+                <div fxLayout="column" fxLayoutGap="0.2em" fxLayoutAlign="center center">
+                    <p><span class="fa fa-user fa-lg"></span> {{topPlayers[0].username}}</p>
+                    <p><span class="fa fa-clock-o fa-lg"></span> {{topPlayers[0].time | time}}</p>
+                </div>
+            </div>
+
+            <div class="dashboard-topplayer-container"
+                    fxLayout="column"
+                    fxLayoutAlign="center center"
+                    fxLayoutGap="0.5em">
+                <h2>Medium</h2>
+                <img src='../../../assets/images/medium.png' alt="Easy Trophy" height="220px"> 
+                <div fxLayout="column" fxLayoutGap="0.2em" fxLayoutAlign="center center">
+                    <p><span class="fa fa-user fa-lg"></span> {{topPlayers[1].username}}</p>
+                    <p><span class="fa fa-clock-o fa-lg"></span> {{topPlayers[1].time | time}}</p>
+                </div>
+            </div>
+
+            <div class="dashboard-topplayer-container"
+                    fxLayout="column"
+                    fxLayoutAlign="center center"
+                    fxLayoutGap="0.5em">
+                <h2>Hard</h2>
+                <img src='../../../assets/images/hard.png' alt="Easy Trophy" height="220px"> 
+                <div fxLayout="column" fxLayoutGap="0.2em" fxLayoutAlign="center center">
+                    <p><span class="fa fa-user fa-lg"></span> {{topPlayers[2].username}}</p>
+                    <p><span class="fa fa-clock-o fa-lg"></span> {{topPlayers[2].time | time}}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <div class="mat-elevation-z18" 
         id="historytable-container" 
         fxFlex="column"

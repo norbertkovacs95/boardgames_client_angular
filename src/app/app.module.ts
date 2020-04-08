@@ -13,6 +13,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTableModule} from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material';
 import { MatSortModule } from '@angular/material';
+import {MatCardModule} from '@angular/material/card';
 
 import { MineSweeperGameComponent } from './mine-sweeper/mine-sweeper-game.component';
 import { MineSweeperMenuComponent } from './mine-sweeper/mine-sweeper-menu/mine-sweeper-menu.component';
@@ -49,7 +50,8 @@ import { TimePipe } from './pipes/time.pipe';
     MatMenuModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent],
