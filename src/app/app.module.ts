@@ -14,6 +14,7 @@ import {MatTableModule} from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material';
 import { MatSortModule } from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { MineSweeperGameComponent } from './mine-sweeper/mine-sweeper-game.component';
 import { MineSweeperMenuComponent } from './mine-sweeper/mine-sweeper-menu/mine-sweeper-menu.component';
@@ -24,6 +25,7 @@ import { SnakeComponent } from './snake/snake.component';
 import { HeaderComponent } from './header/header.component';
 import { SudokuComponent } from './sudoku/sudoku.component';
 import { TimePipe } from './pipes/time.pipe';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { TimePipe } from './pipes/time.pipe';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatCardModule
+    MatCardModule,
+    HttpClientModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

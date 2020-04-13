@@ -3,11 +3,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
 import { PickPugPoopResult } from '../shared/pickpugpoopResult';
+import { TopPlayers } from '../shared/topPickPugPoopPlayers';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PickpugpoopResultService {
+export class PickPugPoopResultService {
 
   constructor(private http: HttpClient) { }
 
@@ -16,6 +17,6 @@ export class PickpugpoopResultService {
   }
 
   getTopResults() {
-    return this.http.get(baseURL + 'topplayers');
+    return this.http.get<TopPlayers>(baseURL + 'pickpugpoopResults/topPlayers');
   }
 }

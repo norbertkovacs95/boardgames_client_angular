@@ -40,41 +40,47 @@
             fxLayoutAlign="space-around"
             fxLayoutAlign.lt-md="center center">
 
-            <div class="dashboard-topplayer-container"
-                    fxLayout="column"
-                    fxLayoutAlign="center center"
-                    fxLayoutGap="0.5em">
+            <div *ngIf="topPlayers"     
+                class="dashboard-topplayer-container"
+                fxLayout="column"
+                fxLayoutAlign="center center"
+                fxLayoutGap="0.5em">
                 <p>Easy</p>
                 <img src='../../../assets/images/easy.png' alt="Easy Trophy" height="220px"> 
                 <div fxLayout="column" fxLayoutGap="0.4em" fxLayoutAlign="center center">
-                    <p><span class="fa fa-user fa-lg"></span> {{topPlayers[0].username}}</p>
-                    <p><span class="fa fa-clock-o fa-lg"></span> {{topPlayers[0].time | time}}</p>
+                    <p><span class="fa fa-user fa-lg"></span> {{topPlayers.easy.username}}</p>
+                    <p><span class="fa fa-clock-o fa-lg"></span> {{topPlayers.easy.time | time}}</p>
                 </div>
             </div>
+            <div *ngIf="!topPlayers" fxLayoutAlign="center center"><mat-spinner color="accent"></mat-spinner></div>
 
-            <div class="dashboard-topplayer-container"
-                    fxLayout="column"
-                    fxLayoutAlign="center center"
-                    fxLayoutGap="0.5em">
+            <div *ngIf="topPlayers"
+                class="dashboard-topplayer-container"
+                fxLayout="column"
+                fxLayoutAlign="center center"
+                fxLayoutGap="0.5em">
                 <p>Medium</p>
                 <img src='../../../assets/images/medium.png' alt="Easy Trophy" height="220px"> 
                 <div fxLayout="column" fxLayoutGap="0.4em" fxLayoutAlign="center center">
-                    <p><span class="fa fa-user fa-lg"></span> {{topPlayers[1].username}}</p>
-                    <p><span class="fa fa-clock-o fa-lg"></span> {{topPlayers[1].time | time}}</p>
+                    <p><span class="fa fa-user fa-lg"></span> {{topPlayers.medium.username}}</p>
+                    <p><span class="fa fa-clock-o fa-lg"></span> {{topPlayers.medium.time | time}}</p>
                 </div>
             </div>
+            <div *ngIf="!topPlayers" fxLayoutAlign="center center"><mat-spinner color="accent"></mat-spinner></div>
 
-            <div class="dashboard-topplayer-container"
-                    fxLayout="column"
-                    fxLayoutAlign="center center"
-                    fxLayoutGap="0.5em">
+            <div *ngIf="topPlayers"
+                class="dashboard-topplayer-container"
+                fxLayout="column"
+                fxLayoutAlign="center center"
+                fxLayoutGap="0.5em">
                 <p>Hard</p>
                 <img src='../../../assets/images/hard.png' alt="Easy Trophy" height="220px"> 
                 <div fxLayout="column" fxLayoutGap="0.4em" fxLayoutAlign="center center">
-                    <p><span class="fa fa-user fa-lg"></span> {{topPlayers[2].username}}</p>
-                    <p><span class="fa fa-clock-o fa-lg"></span> {{topPlayers[2].time | time}}</p>
+                    <p><span class="fa fa-user fa-lg"></span> {{topPlayers.hard.username}}</p>
+                    <p><span class="fa fa-clock-o fa-lg"></span> {{topPlayers.hard.time | time}}</p>
                 </div>
             </div>
+            <div *ngIf="!topPlayers" fxLayoutAlign="center center"><mat-spinner color="accent"></mat-spinner></div>
 
         </div>
     </div>
@@ -92,32 +98,31 @@
         <table mat-table [dataSource]="playHistorySource" matSort>
 
             <!-- ID Column -->
-            <ng-container matColumnDef="Username">
+            <ng-container matColumnDef="username">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
             <td mat-cell *matCellDef="let row"> {{row.username}} </td>
             </ng-container>
 
             <!-- Progress Column -->
-            <ng-container matColumnDef="Date">
+            <ng-container matColumnDef="date">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
             <td mat-cell *matCellDef="let row"> {{row.date | date:'M/d/yy, h:mm a'}}</td>
             </ng-container>
 
             <!-- Name Column -->
-            <ng-container matColumnDef="Difficulty">
+            <ng-container matColumnDef="difficulty">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Difficulty </th>
             <td mat-cell *matCellDef="let row"> {{row.difficulty}} </td>
             </ng-container>
 
             <!-- Color Column -->
-            <ng-container matColumnDef="Time">
+            <ng-container matColumnDef="time">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Time </th>
             <td mat-cell *matCellDef="let row"> {{row.time | time}} </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-            </tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
 
         <mat-paginator color="accent" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

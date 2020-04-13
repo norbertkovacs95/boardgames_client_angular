@@ -6,8 +6,9 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 
 import { MineSweeperGameComponent } from '../mine-sweeper-game.component';
-import { PickPugPoopResults } from '../../shared/DUMYRESULT';
 import { PickPugPoopResult } from '../../shared/pickpugpoopResult';
+import { PickPugPoopResultService } from '../../services/pickpugpoop-result.service';
+import { TopPlayers } from '../../shared/topPickPugPoopPlayers';
 
 @Component({
   selector: 'app-mine-sweeper-menu',
@@ -16,40 +17,28 @@ import { PickPugPoopResult } from '../../shared/pickpugpoopResult';
 })
 export class MineSweeperMenuComponent implements OnInit {
 
-  topPlayers: PickPugPoopResult[] = [
-    {
-    username: 'EveSuukszag',
-    date: new Date(),
-    time: 150,
-    difficulty: 'easy'
-    },
-    {
-      username: 'EvePoopszag',
-      date: new Date(),
-      time: 500,
-      difficulty: 'meidum'
-    },
-    {
-      username: 'EvePoopSuukSzag',
-      date: new Date(),
-      time: 600,
-      difficulty: 'hard'
-    }
-  ]
-  displayedColumns: string[] = ['Username', 'Date', 'Difficulty', 'Time'];
-  playHistory: PickPugPoopResult[] = PickPugPoopResults;
+  topPlayers: TopPlayers;
+
+  displayedColumns: string[] = ['username', 'date', 'difficulty', 'time'];
+  playHistory: PickPugPoopResult[];
   playHistorySource: MatTableDataSource<PickPugPoopResult>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(public dialog: MatDialog) { 
-    this.playHistorySource = new MatTableDataSource(this.playHistory);
+  constructor(public dialog: MatDialog, private resultService: PickPugPoopResultService) { 
+    resultService.getTopResults()
+      .subscribe(result => this.topPlayers = result);
   }
 
   ngOnInit() {
-    this.playHistorySource.paginator = this.paginator;
-    this.playHistorySource.sort = this.sort;
+    this.resultService.getResults()
+    .subscribe(results => {
+      this.playHistory = results;
+      this.playHistorySource = new MatTableDataSource(this.playHistory);
+      this.playHistorySource.paginator = this.paginator;
+      this.playHistorySource.sort = this.sort;
+    });
   }
 
   openGame(difficulty: string) {
