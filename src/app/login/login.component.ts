@@ -19,8 +19,7 @@ export class LoginComponent implements OnInit {
 
   validationMessages = {
     'username': {
-      'required':'Email is required.',
-      'email': 'Email must be in correct format'
+      'required':'Username is required.'
     },
     'password' : {
       'required':'Password is required.'
@@ -44,7 +43,7 @@ export class LoginComponent implements OnInit {
     this.loginForm.valueChanges
       .subscribe(data => this.onValueChangeLogin(data));
     this.onValueChangeLogin();
-
+    console.log(this.loginForm)
   }
 
   onValueChangeLogin(data?: any) {

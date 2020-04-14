@@ -1,0 +1,67 @@
+<div id="signup-main-container"
+    fxLayoutAlign="column"
+    fxLayoutAlign="center center">
+
+    <div class="mat-elevation-z18" 
+        id="signup-container"
+        fxLayout="column">        
+
+        <mat-toolbar>
+            <span class="fill-space"></span>
+            <h1>Sign up</h1>
+            <span class="fill-space"></span>
+        </mat-toolbar>
+
+        <form novalidate [formGroup]="signupForm" (ngSubmit)="onSubmitLogin()" class="fill-space" 
+            fxLayoutGap="20px" fxLayout="column" fxLayoutAlign="none center">
+
+            <mat-form-field color="accent">
+                <mat-label>Username</mat-label>
+                <input matInput placeholder="Enter your username" type="text" formControlName="username">
+                <button mat-button *ngIf="signupForm" color="accent" matSuffix mat-icon-button (click)="signupForm.get('username').setValue('')">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="formErrors.username">{{formErrors.username}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field color="accent">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Enter your email" type="text" formControlName="email">
+                <button mat-button *ngIf="signupForm" color="accent" matSuffix mat-icon-button (click)="signupForm.get('email').setValue('')">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="formErrors.email">{{formErrors.email}}</mat-error>
+            </mat-form-field>
+
+
+            <mat-form-field color="accent">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Enter your password" type="password" formControlName="password">
+                <button mat-button *ngIf="signupForm" color="accent" matSuffix mat-icon-button (click)="signupForm.get('password').setValue('')">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="formErrors.password">{{formErrors.password}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field color="accent">
+                <mat-label>Confirm password</mat-label>
+                <input matInput placeholder="Confirm your password..." type="password" formControlName="passwordAgain" [errorStateMatcher]="errorMatcher">
+                <button mat-button *ngIf="signupForm" color="accent" matSuffix mat-icon-button (click)="signupForm.get('passwordAgain').setValue('')">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="formErrors.passwordAgain">{{formErrors.passwordAgain}}</mat-error>
+            </mat-form-field>
+
+            <mat-dialog-actions fxLayoutAlign="center center" fxLayoutGap="10px">
+                <button mat-raised-button color="accent" type="submit" [disabled]="signupForm.invalid">Sign up</button>
+                <a mat-raised-button type="button" href="/login">Log in</a>
+            </mat-dialog-actions>
+
+            <div fxLayoutAlign="center center">
+                <mat-error *ngIf="loginRespError">{{loginRespError}}</mat-error>
+            </div>
+
+        </form>
+        
+    </div>
+</div>

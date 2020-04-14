@@ -1,4 +1,4 @@
-<div id="login-signup-main-container"
+<div id="login-main-container"
     fxLayoutAlign="column"
     fxLayoutAlign="center center">
 
@@ -18,12 +18,18 @@
             <mat-form-field color="accent">
                 <mat-label>Username</mat-label>
                 <input matInput placeholder="Ex. username" type="text" formControlName="username">
+                <button mat-button *ngIf="loginForm" color="accent" matSuffix mat-icon-button (click)="loginForm.setValue({username:'', password:loginForm.value.password})">
+                    <mat-icon>close</mat-icon>
+                </button>
                 <mat-error *ngIf="formErrors.username">{{formErrors.username}}</mat-error>
             </mat-form-field>
 
             <mat-form-field color="accent">
                 <mat-label>Password</mat-label>
                 <input matInput placeholder="Ex. password" type="text" formControlName="password">
+                <button mat-button *ngIf="loginForm" color="accent" matSuffix mat-icon-button (click)="loginForm.setValue({username:loginForm.value.username, password:''})">
+                    <mat-icon>close</mat-icon>
+                </button>
                 <mat-error *ngIf="formErrors.password">{{formErrors.password}}</mat-error>
             </mat-form-field>
 

@@ -29,6 +29,7 @@ import { HeaderComponent } from './header/header.component';
 import { SudokuComponent } from './sudoku/sudoku.component';
 import { TimePipe } from './pipes/time.pipe';
 import { HttpClientModule } from '@angular/common/http';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { HttpClientModule } from '@angular/common/http';
     SnakeComponent,
     HeaderComponent,
     SudokuComponent,
-    TimePipe
+    TimePipe,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

@@ -6,9 +6,11 @@ import { GamesComponent } from '../app/games/games.component';
 import { MineSweeperMenuComponent } from '../app/mine-sweeper/mine-sweeper-menu/mine-sweeper-menu.component'
 import { SnakeComponent } from '../app/snake/snake.component';
 import { SudokuComponent } from '../app/sudoku/sudoku.component';
+import { SignupComponent } from '../app/signup/signup.component';
 
 const routes: Routes = [
   { path: 'login',  component: LoginComponent },
+  { path: 'signup', component: SignupComponent},
   { 
     path: 'games',
     component: GamesComponent,
