@@ -15,6 +15,9 @@ import { MatPaginatorModule } from '@angular/material';
 import { MatSortModule } from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import { MineSweeperGameComponent } from './mine-sweeper/mine-sweeper-game.component';
 import { MineSweeperMenuComponent } from './mine-sweeper/mine-sweeper-menu/mine-sweeper-menu.component';
@@ -55,7 +58,11 @@ import { HttpClientModule } from '@angular/common/http';
     MatSortModule,
     MatCardModule,
     HttpClientModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent],
