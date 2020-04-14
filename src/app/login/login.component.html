@@ -26,7 +26,7 @@
 
             <mat-form-field color="accent">
                 <mat-label>Password</mat-label>
-                <input matInput placeholder="Ex. password" type="text" formControlName="password">
+                <input matInput placeholder="Ex. password" type="password" formControlName="password">
                 <button mat-button *ngIf="loginForm" color="accent" matSuffix mat-icon-button (click)="loginForm.setValue({username:loginForm.value.username, password:''})">
                     <mat-icon>close</mat-icon>
                 </button>
@@ -42,7 +42,7 @@
                 <a mat-raised-button type="button" href="/signup">Sign up</a>
             </mat-dialog-actions>
 
-            <div fxLayoutAlign="center center">
+            <div fxLayoutAlign="center center" id="resp-err-container">
                 <mat-error *ngIf="loginRespError">{{loginRespError}}</mat-error>
             </div>
 

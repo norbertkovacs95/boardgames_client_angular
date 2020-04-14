@@ -12,8 +12,8 @@
             <span class="fill-space"></span>
         </mat-toolbar>
 
-        <form novalidate [formGroup]="signupForm" (ngSubmit)="onSubmitLogin()" class="fill-space" 
-            fxLayoutGap="20px" fxLayout="column" fxLayoutAlign="none center">
+        <form novalidate [formGroup]="signupForm" (ngSubmit)="onSubmitSignup()" class="fill-space" 
+            fxLayoutGap="15px" fxLayout="column" fxLayoutAlign="none center">
 
             <mat-form-field color="accent">
                 <mat-label>Username</mat-label>
@@ -58,7 +58,7 @@
             </mat-dialog-actions>
 
             <div fxLayoutAlign="center center">
-                <mat-error *ngIf="loginRespError">{{loginRespError}}</mat-error>
+                <mat-error *ngIf="signupRespError">{{signupRespError}}</mat-error>
             </div>
 
         </form>

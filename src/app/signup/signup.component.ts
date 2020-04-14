@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { PasswordErrorStateMatcher } from '../shared/passwordErrorMatcher';
+import { AuthenticationService } from '../services/authentication.service';
+import { User } from '../shared/user';
 
 @Component({
   selector: 'app-signup',
@@ -38,7 +41,11 @@ export class SignupComponent implements OnInit {
     }
   };
 
-  constructor(private fb: FormBuilder) { 
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthenticationService,
+    private router: Router
+    ) { 
     
   }
 
@@ -95,8 +102,23 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  onSubmitLogin() {
-
+  onSubmitSignup() {
+    let user: User = this.signupForm.value;
+    this.authService.signupUser(user)
+      .subscribe(
+        (resp) => {
+          if (resp.status === 200) {
+            window.localStorage.setItem('token', resp.token);
+            this.router.navigate(['/games']);
+          }
+        },
+        (err) => {
+          this.signupForm.reset();
+          this.signupRespError = err.status === 409 ? 
+            err.error.err.message :
+            'An unknown error occured, please try again';
+        }
+      )
   }
 
 }

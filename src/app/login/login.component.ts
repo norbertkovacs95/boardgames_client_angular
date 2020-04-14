@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router} from '@angular/router';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from '../services/authentication.service';
+import { User } from '../shared/user';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +29,11 @@ export class LoginComponent implements OnInit {
     }
   };
 
-  constructor(private fb: FormBuilder) { 
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthenticationService,
+    private router: Router
+    ) { 
     
   }
 
@@ -70,7 +77,23 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitLogin() {
+    let user: User = this.loginForm.value;
 
+    this.authService.loginUser(user)
+      .subscribe(
+        (resp) => {
+          if (resp.status === 200) {
+            window.localStorage.setItem('token', resp.token);
+            this.router.navigate(['/games']);
+          }
+        },
+        (err) => {
+          this.loginForm.reset();
+          this.loginRespError = err.status === 401 ?
+            'The given username or password is invalid' :
+            'An unknown error occured, please try again';
+        }
+      )
   }
 
 }
