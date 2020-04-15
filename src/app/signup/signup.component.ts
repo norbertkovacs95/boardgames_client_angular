@@ -46,7 +46,7 @@ export class SignupComponent implements OnInit {
     private authService: AuthenticationService,
     private router: Router
     ) { 
-    
+      if(this.authService.isAuthenticated()) this.router.navigate(['/games']);
   }
 
   ngOnInit() {

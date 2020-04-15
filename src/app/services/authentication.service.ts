@@ -31,7 +31,7 @@ export class AuthenticationService {
     return !this.jwtHelper.isTokenExpired(token);
   }
 
-  verifyUser(): Observable<any> {
+  isUserVerified(): Observable<any> {
     let token = this.tokenService.getJWT();
     const httpOptions = {
       headers: new HttpHeaders({

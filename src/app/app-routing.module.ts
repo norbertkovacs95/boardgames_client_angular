@@ -8,10 +8,12 @@ import { MineSweeperMenuComponent } from '../app/mine-sweeper/mine-sweeper-menu/
 import { SnakeComponent } from '../app/snake/snake.component';
 import { SudokuComponent } from '../app/sudoku/sudoku.component';
 import { SignupComponent } from '../app/signup/signup.component';
+import { LostpasswordComponent } from '../app/lostpassword/lostpassword.component';
 
 const routes: Routes = [
   { path: 'login',  component: LoginComponent },
   { path: 'signup', component: SignupComponent},
+  { path: 'lostpassword', component: LostpasswordComponent},
   { 
     path: 'games',
     component: GamesComponent,

@@ -31,6 +31,7 @@ import { SudokuComponent } from './sudoku/sudoku.component';
 import { TimePipe } from './pipes/time.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './signup/signup.component';
+import { LostpasswordComponent } from './lostpassword/lostpassword.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { SignupComponent } from './signup/signup.component';
     HeaderComponent,
     SudokuComponent,
     TimePipe,
-    SignupComponent
+    SignupComponent,
+    LostpasswordComponent
   ],
   imports: [
     BrowserModule,
