@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, Router } from '@angular/router';
 
+import { AuthGuard } from '../app/guards/auth.guard';
 import { LoginComponent } from '../app/login/login.component';
 import { GamesComponent } from '../app/games/games.component';
 import { MineSweeperMenuComponent } from '../app/mine-sweeper/mine-sweeper-menu/mine-sweeper-menu.component'
@@ -14,6 +15,7 @@ const routes: Routes = [
   { 
     path: 'games',
     component: GamesComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: '/games/pickpugpoop', pathMatch: 'full' },
       { path: 'pickpugpoop', component: MineSweeperMenuComponent },
@@ -21,7 +23,8 @@ const routes: Routes = [
       { path:'sudoku', component: SudokuComponent }
     ] 
   },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'login', pathMatch: 'full' } // or handle 404 page
 ];
 
 @NgModule({
@@ -29,9 +32,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { 
-  constructor(private router: Router) {
-    this.router.errorHandler = (error: any) => {
-        this.router.navigate(['/login']); // or 404 page
-    }
-  }
 }

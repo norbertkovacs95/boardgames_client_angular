@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { User } from 'src/app/shared/user';
-import { TokenService } from './token.service';
-
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, of} from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { User } from 'src/app/shared/user';
+import { TokenService } from './token.service';
 import { baseURL } from '../shared/baseurl';
 
 @Injectable({
@@ -13,7 +14,8 @@ export class AuthenticationService {
 
   constructor(
     private http: HttpClient,
-    private tokenService: TokenService) { }
+    private tokenService: TokenService,
+    public jwtHelper: JwtHelperService) { }
 
   signupUser(user: User): Observable<any> {
     return this.http.post<any>(baseURL + 'users/signup',user);
@@ -21,6 +23,12 @@ export class AuthenticationService {
 
   loginUser(user: User): Observable<any>  {
     return this.http.post<any>(baseURL + 'users/login',user);
+  }
+
+  isAuthenticated() : boolean {
+    let token = <string>this.tokenService.getJWT();
+    console.log(this.jwtHelper.isTokenExpired(token));
+    return !this.jwtHelper.isTokenExpired(token);
   }
 
   verifyUser(): Observable<any> {

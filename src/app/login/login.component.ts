@@ -50,7 +50,6 @@ export class LoginComponent implements OnInit {
     this.loginForm.valueChanges
       .subscribe(data => this.onValueChangeLogin(data));
     this.onValueChangeLogin();
-    console.log(this.loginForm)
   }
 
   onValueChangeLogin(data?: any) {
