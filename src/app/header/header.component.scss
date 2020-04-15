@@ -11,3 +11,11 @@ a[mat-button] {
 .header-container {
     width: 100%;
 }
+
+.mat-icon {
+    font-size: 35px !important;
+}
+
+.mat-icon :hover {
+    color: mat-color($accentPalette) !important;
+}
