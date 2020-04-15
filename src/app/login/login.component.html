@@ -18,7 +18,7 @@
             <mat-form-field color="accent">
                 <mat-label>Username</mat-label>
                 <input matInput placeholder="Ex. username" type="text" formControlName="username">
-                <button mat-button *ngIf="loginForm" color="accent" matSuffix mat-icon-button (click)="loginForm.setValue({username:'', password:loginForm.value.password})">
+                <button mat-button *ngIf="loginForm" color="accent" matSuffix mat-icon-button type="button" (click)="loginForm.get('username').setValue('')">
                     <mat-icon>close</mat-icon>
                 </button>
                 <mat-error *ngIf="formErrors.username">{{formErrors.username}}</mat-error>
@@ -27,7 +27,7 @@
             <mat-form-field color="accent">
                 <mat-label>Password</mat-label>
                 <input matInput placeholder="Ex. password" type="password" formControlName="password">
-                <button mat-button *ngIf="loginForm" color="accent" matSuffix mat-icon-button (click)="loginForm.setValue({username:loginForm.value.username, password:''})">
+                <button mat-button *ngIf="loginForm" color="accent" matSuffix mat-icon-button type="button"  (click)="loginForm.get('password').setValue('')">
                     <mat-icon>close</mat-icon>
                 </button>
                 <mat-error *ngIf="formErrors.password">{{formErrors.password}}</mat-error>

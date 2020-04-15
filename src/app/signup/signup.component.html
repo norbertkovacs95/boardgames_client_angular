@@ -18,7 +18,7 @@
             <mat-form-field color="accent">
                 <mat-label>Username</mat-label>
                 <input matInput placeholder="Enter your username" type="text" formControlName="username">
-                <button mat-button *ngIf="signupForm" color="accent" matSuffix mat-icon-button (click)="signupForm.get('username').setValue('')">
+                <button mat-button *ngIf="signupForm" color="accent" matSuffix mat-icon-button type="button" (click)="signupForm.get('username').setValue('')">
                     <mat-icon>close</mat-icon>
                 </button>
                 <mat-error *ngIf="formErrors.username">{{formErrors.username}}</mat-error>
@@ -27,7 +27,7 @@
             <mat-form-field color="accent">
                 <mat-label>Email</mat-label>
                 <input matInput placeholder="Enter your email" type="text" formControlName="email">
-                <button mat-button *ngIf="signupForm" color="accent" matSuffix mat-icon-button (click)="signupForm.get('email').setValue('')">
+                <button mat-button *ngIf="signupForm" color="accent" matSuffix mat-icon-button type="button" (click)="signupForm.get('email').setValue('')">
                     <mat-icon>close</mat-icon>
                 </button>
                 <mat-error *ngIf="formErrors.email">{{formErrors.email}}</mat-error>
@@ -37,7 +37,7 @@
             <mat-form-field color="accent">
                 <mat-label>Password</mat-label>
                 <input matInput placeholder="Enter your password" type="password" formControlName="password">
-                <button mat-button *ngIf="signupForm" color="accent" matSuffix mat-icon-button (click)="signupForm.get('password').setValue('')">
+                <button mat-button *ngIf="signupForm" color="accent" matSuffix mat-icon-button type="button" (click)="signupForm.get('password').setValue('')">
                     <mat-icon>close</mat-icon>
                 </button>
                 <mat-error *ngIf="formErrors.password">{{formErrors.password}}</mat-error>
@@ -46,7 +46,7 @@
             <mat-form-field color="accent">
                 <mat-label>Confirm password</mat-label>
                 <input matInput placeholder="Confirm your password..." type="password" formControlName="passwordAgain" [errorStateMatcher]="errorMatcher">
-                <button mat-button *ngIf="signupForm" color="accent" matSuffix mat-icon-button (click)="signupForm.get('passwordAgain').setValue('')">
+                <button mat-button *ngIf="signupForm" color="accent" matSuffix mat-icon-button type="button" (click)="signupForm.get('passwordAgain').setValue('')">
                     <mat-icon>close</mat-icon>
                 </button>
                 <mat-error *ngIf="formErrors.passwordAgain">{{formErrors.passwordAgain}}</mat-error>

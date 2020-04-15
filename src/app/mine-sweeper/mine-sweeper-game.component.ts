@@ -136,7 +136,6 @@ class MineSweeperBoard {
     }
 
     this.setmouseEvents();
-    console.log(this);
   }
 
   private drawCanvas(height: number, width: number):void {
