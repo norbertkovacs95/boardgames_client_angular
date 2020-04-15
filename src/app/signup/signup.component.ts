@@ -70,7 +70,6 @@ export class SignupComponent implements OnInit {
     this.signupForm.valueChanges
       .subscribe(data => this.onValueChangeSignin(data));
     this.onValueChangeSignin();
-    console.log(this.signupForm)
   }
 
   onValueChangeSignin(data?: any) {
