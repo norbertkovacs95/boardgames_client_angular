@@ -8,6 +8,10 @@ a[mat-button] {
     border-radius: 0px !important;
 }
 
+button[mat-button] {
+    border-radius: 0px !important;
+}
+
 .header-container {
     width: 100%;
 }
@@ -16,6 +20,10 @@ a[mat-button] {
     font-size: 35px !important;
 }
 
-.mat-icon :hover {
-    color: mat-color($accentPalette) !important;
+.account-menu-item:hover {
+    border-bottom: 3px solid mat-color($accentPalette);
+}
+
+.no-hover-effect::ng-deep .mat-button-focus-overlay {
+    background-color:transparent !important;
 }

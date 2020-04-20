@@ -4,6 +4,6 @@ import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 export class PasswordErrorStateMatcher implements ErrorStateMatcher {
     isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
       let password = form.form.get('password');
-     return password.value !== control.value && control.touched;
+     return (password.value !== control.value && control.touched) || (control.value == "" && control.touched);
     }
   }

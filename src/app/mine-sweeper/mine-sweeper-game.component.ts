@@ -1,7 +1,9 @@
 import { Component, OnInit, ElementRef, ViewChild, ViewEncapsulation, OnDestroy, Inject } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 import { MineSweeperPopupComponent} from './mine-sweeper-popup/mine-sweeper-popup.component';
+import { PickPugPoopResultService } from '../services/pickpugpoop-result.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-mine-sweeper-game',
@@ -11,6 +13,8 @@ import { MineSweeperPopupComponent} from './mine-sweeper-popup/mine-sweeper-popu
 })
 export class MineSweeperGameComponent implements OnInit, OnDestroy {
 
+  private gameStartToken: string;
+  private tokenExpiry: Date;
   difficulty: string;
   mines: number;
   playBoard: MineSweeperBoard;
@@ -21,9 +25,14 @@ export class MineSweeperGameComponent implements OnInit, OnDestroy {
   @ViewChild('poop', { static: true }) poop: ElementRef<HTMLImageElement>;
   @ViewChild('timer', { static: true }) timerEl: ElementRef<HTMLElement>;
 
-  constructor(private dialog: MatDialog, @Inject(MAT_DIALOG_DATA) data) {
-    this.difficulty = data.difficulty;
-    this.mines = data.mines;
+  constructor(
+    private dialog: MatDialog, 
+    @Inject(MAT_DIALOG_DATA) data,
+    private resultService: PickPugPoopResultService,
+    private gameDialogRef: MatDialogRef<MineSweeperGameComponent>,
+    private snackBar: MatSnackBar) {
+      this.difficulty = data.difficulty;
+      this.mines = data.mines;
    }
 
   ngOnInit() {
@@ -41,12 +50,13 @@ export class MineSweeperGameComponent implements OnInit, OnDestroy {
       startView: true
     }});
 
-    dialogRef.afterClosed().subscribe(() => {
-      this.dialog.open(MineSweeperPopupComponent, {width: '350px', height: '350px',data:{
-        infoView: true,
-        mines: this.mines
-      }});
-    })
+    dialogRef.afterClosed()
+      .subscribe(() => {
+        this.dialog.open(MineSweeperPopupComponent, {width: '350px', height: '350px',data:{
+          infoView: true,
+          mines: this.mines
+        }});
+      })
   }
 
   ngOnDestroy(): void {
@@ -54,8 +64,31 @@ export class MineSweeperGameComponent implements OnInit, OnDestroy {
   }
 
   createGame() {
-    if (typeof this.playBoard !== 'undefined') this.playBoard.stopTimer(); 
-    this.playBoard = new MineSweeperBoard(this.difficulty, this.canvas, this.grass,this.pug, this.poop, this.timerEl, this.dialog,'#b1f774', '#5D5959');
+    if (typeof this.playBoard !== 'undefined') this.playBoard.stopTimer();
+    if (typeof this.gameStartToken === 'undefined' || this.tokenExpiry > new Date()) {
+      this.resultService.getGameStartToken(this.difficulty)
+        .subscribe(
+          (resp) => {
+            this.gameStartToken = resp.gameStartToken;
+            this.tokenExpiry = resp.expiry;
+            this.playBoard = new MineSweeperBoard(
+              this.difficulty, this.canvas, this.grass,this.pug, 
+              this.poop, this.gameStartToken, this.timerEl, this.dialog,'#b1f774', '#5D5959'
+            );
+          },
+          (err) => {
+            this.gameDialogRef.close();
+            this.snackBar.open('A server error occured, please try again', 'Close' , {
+              duration: 3000,
+            });
+          }
+        )
+    } else { 
+      this.playBoard = new MineSweeperBoard(
+        this.difficulty, this.canvas, this.grass,this.pug, 
+        this.poop, this.gameStartToken, this.timerEl, this.dialog,'#b1f774', '#5D5959'
+      );
+    }
   }
 
   resetGame() {
@@ -68,22 +101,25 @@ export class MineSweeperGameComponent implements OnInit, OnDestroy {
 
 class MineSweeperBoard {
 
+  private gameStartToken: string;
   private timerFunction: number;
   private timerStartDate: Date;
+  private timerCurrDate: number;
   private timerEl: ElementRef<HTMLElement>;
   private dialog: MatDialog;
 
   public flags: number = 0;
+  private difficulty: string;
   private mines: number;
   private units: number;
   private clickedUnits: number = 0;
   private unitPx: number;
   private gameEnded: boolean = false;
-  private gameStarted: boolean= false;
+  private gameStarted: boolean = false;
 
   private canvas: ElementRef<HTMLCanvasElement>;
   private ctx: CanvasRenderingContext2D;
-  private rectColor: string = '#8ddd46';
+  private rectColor: string = '#b1f774';
   private rectBorderColor: string = '#5D5959';
   private blankColor: string = '#544545';
   private boardUnits: MineSweeperUnit[][];
@@ -93,12 +129,14 @@ class MineSweeperBoard {
   private poopImg: ElementRef<HTMLImageElement>;
 
   constructor(difficulty: string, canvasEl: ElementRef<HTMLCanvasElement>, grassEl: ElementRef<HTMLImageElement>,
-              pugEl: ElementRef<HTMLImageElement>,poopEl: ElementRef<HTMLImageElement>, 
+              pugEl: ElementRef<HTMLImageElement>,poopEl: ElementRef<HTMLImageElement>, gameStartToken:string,
               timerEl: ElementRef, dialog: MatDialog, rectColor?: string, rectBorderColor?: string, blankColor?:string) {
     
+    this.gameStartToken = gameStartToken
     this.dialog = dialog;
     this.canvas = canvasEl;
     this.ctx = this.canvas.nativeElement.getContext('2d');
+    this.difficulty = difficulty;
     this.grassImg = grassEl;
     this.pugImg = pugEl;
     this.poopImg = poopEl;
@@ -268,6 +306,8 @@ class MineSweeperBoard {
     this.timerFunction = window.setInterval(() => {
       let currDate = new Date();
       let timePassed: number = Math.round(Math.abs((this.timerStartDate.getTime() - currDate.getTime()) / 1000));
+      this.timerCurrDate = timePassed;
+
       let minutes: any = Math.floor(timePassed / 60);
       let seconds: any = timePassed - minutes * 60;
       if (minutes < 10 ) minutes = '0' + minutes;
@@ -298,16 +338,20 @@ class MineSweeperBoard {
 
   private gameEndHandler(isWin: boolean):void {
     this.gameEnded = true;
+    this.stopTimer();
+
     if (isWin) {
       this.dialog.open(MineSweeperPopupComponent, {width: '350px', height: '300px',data:{
-        winView: true
+        winView: true,
+        difficulty: this.difficulty,
+        time: this.timerCurrDate,
+        gameStartToken: this.gameStartToken
       }});
     } else {
       this.dialog.open(MineSweeperPopupComponent, {width: '350px', height: '300px',data:{
         looseView: true
       }});
     }
-    this.stopTimer();
   }
 
   public stopTimer():void {

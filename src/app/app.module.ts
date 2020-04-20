@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { MineSweeperGameComponent } from './mine-sweeper/mine-sweeper-game.component';
 import { MineSweeperMenuComponent } from './mine-sweeper/mine-sweeper-menu/mine-sweeper-menu.component';
@@ -67,7 +68,8 @@ import { LostpasswordComponent } from './lostpassword/lostpassword.component';
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSnackBarModule
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

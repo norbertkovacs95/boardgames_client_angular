@@ -27,7 +27,6 @@ export class AuthenticationService {
 
   isAuthenticated() : boolean {
     let token = <string>this.tokenService.getJWT();
-    console.log(this.jwtHelper.isTokenExpired(token));
     return !this.jwtHelper.isTokenExpired(token);
   }
 
