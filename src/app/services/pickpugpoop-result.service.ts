@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { baseURL } from '../shared/baseurl';
+import { baseURL } from '../shared/baseUrl';
 import { PickPugPoopResult } from '../shared/pickpugpoopResult';
 import { TopPlayers } from '../shared/topPickPugPoopPlayers';
 import { Observable } from 'rxjs';

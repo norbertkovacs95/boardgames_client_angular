@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { User } from 'src/app/shared/user';
 import { TokenService } from './token.service';
-import { baseURL } from '../shared/baseurl';
+import { baseURL } from '../shared/baseUrl';
 
 @Injectable({
   providedIn: 'root'

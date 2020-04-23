@@ -1,1 +1,10 @@
-<p>snake works!</p>
+<div fxlayout="column" fxLayoutGap="20px">
+    <button mat-raised-button (click)="sendInvite()">Invite Evelin</button>
+    <button mat-raised-button (click)="getOnlinePlayers()">Get Online Players</button>
+</div>
+
+<div fxlayout="column" fxLayoutGap="20px">
+    <button mat-raised-button (click)="acceptInvite()">Accept Invite</button>
+    <button mat-raised-button (click)="declineInvite()">Decline Invite</button>
+    <button mat-raised-button (click)="leaveParty()">Leave Party</button>
+</div>
